@@ -1,0 +1,86 @@
+﻿<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<a href="admin.html" class="btn btn--s">&lt;</a>&nbsp;&nbsp;<strong>Ustawienia paskow led</strong>
+<hr>
+	Numer i parametry wizualizacji:<br>
+<form action="" method="get">
+    <table border="0" cellspacing="0" cellpadding="3" style="width:350px">
+        <tr>
+            <td align="right">Mode:</td>
+            <td>
+                <input type="text" id="mode" name="mode" value="">
+            </td>
+        </tr>
+        <tr>
+            <td align="right">Parametry:     </td>
+            <td>
+                <input type="text" id="arg1" name="arg1" size="3">.<input type="text" id="arg2" name="arg2" size="3">.<input type="text" id="arg3" name="arg3" size="3">
+            </td>
+        </tr>
+        <tr>
+            <td align="right">Wersja:</td>
+            <td>
+                <input type="text" id="version" name="version" value="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" style="width:200px" class="btn btn--m btn--blue" value="Wyslij ustawienia">
+            </td>
+        </tr>
+    </table>
+</form>
+<hr>
+
+
+<script language="javascript" type="text/javascript">
+    
+  
+    function getNetwork() {
+        request = new XMLHttpRequest();
+        if (request) {
+            request.open("GET", "/scan", true);
+            request.addEventListener("load", wifiScan)
+            request.send();
+        }
+    }
+
+    function GetState() {
+        setValues("/admin/connectionstate");
+    }
+    function selssid(value) {
+        document.getElementById("ssid").value = value;
+    }
+
+    window.onload = function () {
+        load("style.css", "css", function () {
+            load("microajax.js", "js", function () {
+                setValues("/pokaz");
+               // setTimeout(GetState, 3000);
+               // setTimeout(getNetwork, 1000);
+            });
+        });
+    }
+
+    function load(e, t, n) {
+        if ("js" == t) {
+            var a = document.createElement("script");
+            a.src = e,
+            a.type = "text/javascript",
+            a.async = !1,
+            a.onload = function () { n() },
+            document.getElementsByTagName("head")[0].appendChild(a)
+        } else if ("css" == t) {
+            var a = document.createElement("link");
+            a.href = e,
+            a.rel = "stylesheet",
+            a.type = "text/css",
+            a.async = !1,
+            a.onload = function () { n() },
+            document.getElementsByTagName("head")[0].appendChild(a)
+        }
+    }
+</script>
+
+
+
